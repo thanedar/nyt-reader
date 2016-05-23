@@ -4,11 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.suswara.newsreader_retro.R;
+import com.suswara.newsreader_retro.adapter.TopStoriesAdapter;
+import com.suswara.newsreader_retro.beans.TS_Result;
+import com.suswara.newsreader_retro.beans.TopStories;
+import com.suswara.newsreader_retro.rest.ApiClient;
+import com.suswara.newsreader_retro.rest.ApiInterface;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +43,10 @@ public class ListingFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private static final String TAG = ListingFragment.class.getSimpleName();
+
+    private final static String TS_API_KEY = "340fe1949bbc2b893c4a336bb072412a:18:74255139";
 
     public ListingFragment() {
         // Required empty public constructor
@@ -65,7 +83,31 @@ public class ListingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listing, container, false);
+        View view = inflater.inflate(R.layout.fragment_listing, container, false);
+
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.news_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ApiInterface apiService =
+                ApiClient.getClient().create(ApiInterface.class);
+
+        Call<TopStories> call = apiService.getTopStories(TS_API_KEY);
+        call.enqueue(new Callback<TopStories>() {
+            @Override
+            public void onResponse(Call<TopStories> call, Response<TopStories> response) {
+                int statusCode = response.code();
+                List<TS_Result> results = response.body().getResults();
+                recyclerView.setAdapter(new TopStoriesAdapter(results, R.layout.list_item_headline, getContext().getApplicationContext()));
+            }
+
+            @Override
+            public void onFailure(Call<TopStories> call, Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -78,18 +120,18 @@ public class ListingFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        /*if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
     /**
