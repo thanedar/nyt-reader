@@ -1,7 +1,9 @@
 package com.suswara.newsreader_retro.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +24,15 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.St
 
     public static class StoryViewHolder extends RecyclerView.ViewHolder {
         LinearLayout storyLayout;
-        TextView movieTitle;
-        TextView data;
-        TextView rating;
-
+        TextView storyTitle;
+        TextView storySubtitle;
+        TextView thumbnail;
 
         public StoryViewHolder(View v) {
             super(v);
-            storyLayout = (LinearLayout) v.findViewById(R.id.movies_layout);
-            movieTitle = (TextView) v.findViewById(R.id.title);
-            data = (TextView) v.findViewById(R.id.subtitle);
+            storyLayout = (LinearLayout) v.findViewById(R.id.stories_layout);
+            storyTitle = (TextView) v.findViewById(R.id.title);
+            storySubtitle = (TextView) v.findViewById(R.id.subtitle);
         }
     }
 
@@ -45,15 +46,26 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.St
     public StoryViewHolder onCreateViewHolder(ViewGroup parent,
                                               int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
+        final StoryViewHolder viewHolder = new StoryViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = viewHolder.getAdapterPosition();
+                Log.i("StoryViewHolder", "Click detected at position " + position );
+                Log.i("StoryViewHolder", "view at position " + view.toString() );
+                Log.i("StoryViewHolder", "viewHolder at position " + viewHolder.toString() );
+            }
+        });
         return new StoryViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(StoryViewHolder holder, final int position) {
-        holder.movieTitle.setText(stories.get(position).getTitle());
-        holder.data.setText(stories.get(position).getByline());
-        holder.rating.setText(stories.get(position).getPublishedDate());
+        if (getItemCount() >= 0) {
+            holder.storyTitle.setText(stories.get(position).getTitle());
+            holder.storySubtitle.setText(stories.get(position).getByline());
+            //holder.thumbnail.setText(stories.get(position).getPublishedDate());
+        }
     }
 
     @Override

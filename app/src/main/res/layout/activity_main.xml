@@ -40,10 +40,11 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
+        app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="center|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"/>
+        android:src="@android:drawable/ic_search_category_default"/>
 
 </android.support.design.widget.CoordinatorLayout>

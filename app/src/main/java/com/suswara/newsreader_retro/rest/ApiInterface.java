@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 
 public interface ApiInterface {
-    @GET("topstories/v2/home.json")
+    @GET("svc/topstories/v2/home.json")
     Call<TopStories> getTopStories(@Query("api_key") String apiKey);
 
     /*@GET("movie/{id}")

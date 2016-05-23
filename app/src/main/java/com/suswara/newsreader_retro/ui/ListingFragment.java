@@ -1,6 +1,5 @@
 package com.suswara.newsreader_retro.ui;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +33,8 @@ import retrofit2.Response;
  */
 public class ListingFragment extends Fragment {
 
+    private TopStoriesAdapter topStoriesAdapter;
+    private RecyclerView recyclerView;
 
     private static final String TAG = ListingFragment.class.getSimpleName();
 
@@ -59,7 +60,7 @@ public class ListingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_listing, container, false);
 
-        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.news_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.news_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ApiInterface apiService =
@@ -69,14 +70,13 @@ public class ListingFragment extends Fragment {
         call.enqueue(new Callback<TopStories>() {
             @Override
             public void onResponse(Call<TopStories> call, Response<TopStories> response) {
-                int statusCode = response.code();
                 List<TS_Result> results = response.body().getResults();
-                recyclerView.setAdapter(new TopStoriesAdapter(results, R.layout.list_item_headline, getContext().getApplicationContext()));
+                topStoriesAdapter = new TopStoriesAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
+                recyclerView.setAdapter(topStoriesAdapter);
             }
 
             @Override
             public void onFailure(Call<TopStories> call, Throwable t) {
-                // Log error here since request failed
                 Log.e(TAG, t.toString());
             }
         });
