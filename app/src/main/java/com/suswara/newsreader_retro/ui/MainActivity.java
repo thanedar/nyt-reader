@@ -95,22 +95,22 @@ public class MainActivity extends AppCompatActivity {
      */
     public static class PlaceholderFragment extends Fragment {
         /**
-         * The fragment argument representing the section number for this
+         * The fragment argument representing the section name for this
          * fragment.
          */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION_NAME = "section_name";
 
         public PlaceholderFragment() {
         }
 
         /**
-         * Returns a new instance of this fragment for the given section
-         * number.
+         * Returns a new instance of this fragment with the given section
+         * name.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(String sectionName) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(ARG_SECTION_NAME, sectionName);
             fragment.setArguments(args);
             return fragment;
         }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getString(R.string.section_format, getArguments().getString(ARG_SECTION_NAME)));
             return rootView;
         }
     }
@@ -139,7 +139,13 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            String sName = getPageTitle(position).toString();
+            if(position == 0){
+                return ListingFragment.newInstance(sName, "");
+            }
+            else {
+                return PlaceholderFragment.newInstance(sName);
+            }
         }
 
         @Override
@@ -152,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "ARTICLES";
                 case 1:
-                    return "SECTION 2";
+                    return "CATEGORIES";
                 case 2:
-                    return "SECTION 3";
+                    return "SETTINGS";
             }
             return null;
         }
