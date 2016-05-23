@@ -4,6 +4,8 @@ package com.suswara.newsreader_retro.beans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -68,4 +70,8 @@ public class TS_Result {
     @Expose
     public String shortUrl;
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }

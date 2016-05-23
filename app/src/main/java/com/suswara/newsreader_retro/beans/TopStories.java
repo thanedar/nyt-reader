@@ -4,6 +4,8 @@ package com.suswara.newsreader_retro.beans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -32,4 +34,8 @@ public class TopStories {
     @Expose
     public List<TS_Result> results = new ArrayList<TS_Result>();
 
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }
