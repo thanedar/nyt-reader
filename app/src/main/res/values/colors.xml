@@ -12,4 +12,13 @@
     <color name="colorGrey">#707070</color>
     <color name="colorGreyLight">#8A8A8A</color>
 
+    <color name="primary">#3498EF</color>
+    <color name="primary_dark">#5B7597</color>
+    <color name="primary_light">#B3E5FC</color>
+    <color name="accent">#448AFF</color>
+    <color name="primary_text">#75848D</color>
+    <color name="primary_background">#EBF1F5</color>
+    <color name="secondary_text">#97A0A9</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#E6EEEB</color>
 </resources>
