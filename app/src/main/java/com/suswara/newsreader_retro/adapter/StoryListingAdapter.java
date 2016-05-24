@@ -1,7 +1,6 @@
 package com.suswara.newsreader_retro.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import com.suswara.newsreader_retro.beans.TS_Result;
 
 import java.util.List;
 
-public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.StoryViewHolder> {
+public class StoryListingAdapter extends RecyclerView.Adapter<StoryListingAdapter.StoryViewHolder> {
 
     private List<TS_Result> stories;
     private int rowLayout;
@@ -36,7 +35,7 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.St
         }
     }
 
-    public TopStoriesAdapter(List<TS_Result> stories, int rowLayout, Context context) {
+    public StoryListingAdapter(List<TS_Result> stories, int rowLayout, Context context) {
         this.stories = stories;
         this.rowLayout = rowLayout;
         this.context = context;
@@ -52,11 +51,10 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesAdapter.St
             public void onClick(View view) {
                 int position = viewHolder.getAdapterPosition();
                 Log.i("StoryViewHolder", "Click detected at position " + position );
-                Log.i("StoryViewHolder", "view at position " + view.toString() );
-                Log.i("StoryViewHolder", "viewHolder at position " + viewHolder.toString() );
+                Log.i("StoryViewHolder", "story at position " + stories.get(position).toString() );
             }
         });
-        return new StoryViewHolder(view);
+        return viewHolder;
     }
 
     @Override

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.suswara.newsreader_retro.R;
-import com.suswara.newsreader_retro.adapter.TopStoriesAdapter;
+import com.suswara.newsreader_retro.adapter.StoryListingAdapter;
 import com.suswara.newsreader_retro.beans.TS_Result;
 import com.suswara.newsreader_retro.beans.TopStories;
 import com.suswara.newsreader_retro.rest.ApiClient;
@@ -33,7 +33,7 @@ import retrofit2.Response;
  */
 public class ListingFragment extends Fragment {
 
-    private TopStoriesAdapter topStoriesAdapter;
+    private StoryListingAdapter storyListingAdapter;
     private RecyclerView recyclerView;
 
     private static final String TAG = ListingFragment.class.getSimpleName();
@@ -71,8 +71,8 @@ public class ListingFragment extends Fragment {
             @Override
             public void onResponse(Call<TopStories> call, Response<TopStories> response) {
                 List<TS_Result> results = response.body().getResults();
-                topStoriesAdapter = new TopStoriesAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
-                recyclerView.setAdapter(topStoriesAdapter);
+                storyListingAdapter = new StoryListingAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
+                recyclerView.setAdapter(storyListingAdapter);
             }
 
             @Override
