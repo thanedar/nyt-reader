@@ -64,7 +64,7 @@ public class ListingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                ApiClient.getNYTClient().create(ApiInterface.class);
 
         Call<TopStories> call = apiService.getTopStories(TS_API_KEY);
         call.enqueue(new Callback<TopStories>() {

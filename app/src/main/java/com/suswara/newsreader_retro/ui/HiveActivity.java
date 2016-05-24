@@ -29,7 +29,7 @@ public class HiveActivity extends AppCompatActivity {
 
 
     // TODO - insert your themoviedb.org API KEY here
-    private final static String API_KEY = "340fe1949bbc2b893c4a336bb072412a:18:74255139";
+    private final static String API_KEY = "7e8f60e325cd06e164799af1e317d7a7";
 
 
     @Override
@@ -46,19 +46,19 @@ public class HiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+                ApiClient.getTMDBClient().create(ApiInterface.class);
 
-        Call<TopStories> call = apiService.getTopStories(API_KEY);
-        call.enqueue(new Callback<TopStories>() {
+        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
+        call.enqueue(new Callback<MoviesResponse>() {
             @Override
-            public void onResponse(Call<TopStories> call, Response<TopStories> response) {
+            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 int statusCode = response.code();
-                List<TS_Result> movies = response.body().getResults();
-                recyclerView.setAdapter(new TopStoriesAdapter(movies, R.layout.list_item_headline, getApplicationContext()));
+                List<Movie> movies = response.body().getResults();
+                recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
             }
 
             @Override
-            public void onFailure(Call<TopStories> call, Throwable t) {
+            public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
             }
