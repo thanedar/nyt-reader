@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+                android:id="@+id/splashView"
+             tools:context="com.suswara.newsreader_retro.ui.SplashActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/splashImageView"
+        android:src="@drawable/android_news_icon"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/splash_text"
+        android:textStyle="bold"
+        android:id="@+id/splashTextView"
+        android:layout_below="@+id/splashImageView"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/splash_padding_top"
+        android:textAlignment="center"/>
+</RelativeLayout>
