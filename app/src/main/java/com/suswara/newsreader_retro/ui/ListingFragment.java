@@ -1,6 +1,5 @@
 package com.suswara.newsreader_retro.ui;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.suswara.newsreader_retro.R;
-import com.suswara.newsreader_retro.adapter.StoryListingAdapter;
+import com.suswara.newsreader_retro.adapter.TopStoryListingAdapter;
 import com.suswara.newsreader_retro.beans.TS_Result;
 import com.suswara.newsreader_retro.beans.TopStories;
 import com.suswara.newsreader_retro.rest.ApiClient;
 import com.suswara.newsreader_retro.rest.ApiInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,15 +25,12 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
  * Use the {@link ListingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ListingFragment extends Fragment {
 
-    private StoryListingAdapter storyListingAdapter;
+    private TopStoryListingAdapter topStoryListingAdapter;
     private RecyclerView recyclerView;
 
     private static final String TAG = ListingFragment.class.getSimpleName();
@@ -70,9 +67,15 @@ public class ListingFragment extends Fragment {
         call.enqueue(new Callback<TopStories>() {
             @Override
             public void onResponse(Call<TopStories> call, Response<TopStories> response) {
-                List<TS_Result> results = response.body().getResults();
-                storyListingAdapter = new StoryListingAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
-                recyclerView.setAdapter(storyListingAdapter);
+                List<TS_Result> results;
+                if(response != null) {
+                    results = response.body().getResults();
+                }
+                else {
+                    results = new ArrayList<TS_Result>();
+                }
+                topStoryListingAdapter = new TopStoryListingAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
+                recyclerView.setAdapter(topStoryListingAdapter);
             }
 
             @Override
@@ -82,20 +85,5 @@ public class ListingFragment extends Fragment {
         });
 
         return view;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
