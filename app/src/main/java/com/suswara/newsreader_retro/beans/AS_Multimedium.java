@@ -25,9 +25,6 @@ public class AS_Multimedium {
     @SerializedName("subtype")
     @Expose
     public String subtype;
-    @SerializedName("legacy")
-    @Expose
-    public Legacy legacy;
     @SerializedName("type")
     @Expose
     public String type;

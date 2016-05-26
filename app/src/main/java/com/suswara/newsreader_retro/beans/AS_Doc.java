@@ -23,7 +23,7 @@ public class AS_Doc {
     public String snippet;
     @SerializedName("headline")
     @Expose
-    public Headline headline;
+    public AS_Headline headline;
     @SerializedName("multimedia")
     @Expose
     public List<AS_Multimedium> multimedia = new ArrayList<AS_Multimedium>();
