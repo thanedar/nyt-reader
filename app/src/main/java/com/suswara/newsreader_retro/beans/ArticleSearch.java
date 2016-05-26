@@ -2,16 +2,20 @@
 package com.suswara.newsreader_retro.beans;
 
 import javax.annotation.Generated;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.commons.lang.builder.ToStringBuilder;
+
+import lombok.Data;
 
 @Generated("org.jsonschema2pojo")
+@Data
 public class ArticleSearch {
 
     @SerializedName("response")
     @Expose
-    public Response response;
+    public AS_Response response;
     @SerializedName("status")
     @Expose
     public String status;
@@ -21,7 +25,7 @@ public class ArticleSearch {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return new Gson().toJson(this);
     }
 
 }
