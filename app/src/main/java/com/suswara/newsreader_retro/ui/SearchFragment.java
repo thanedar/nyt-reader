@@ -5,19 +5,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.suswara.newsreader_retro.R;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SearchActivityFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    public SearchActivityFragment() {
+    public SearchFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 }
