@@ -40,9 +40,6 @@ public class StoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        //toolbarLayout.setTitle(storyDetail.getTitle());
-
         Log.i("StoryDetail", storyDetail.toString());
 
         backdrop = (ImageView) findViewById(R.id.backdrop);

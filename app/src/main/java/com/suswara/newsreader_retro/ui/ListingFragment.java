@@ -72,7 +72,7 @@ public class ListingFragment extends Fragment {
                     results = response.body().getResults();
                 }
                 else {
-                    results = new ArrayList<TS_Result>();
+                    results = new ArrayList<>();
                 }
                 topStoryListingAdapter = new TopStoryListingAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
                 recyclerView.setAdapter(topStoryListingAdapter);

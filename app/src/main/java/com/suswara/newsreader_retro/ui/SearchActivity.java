@@ -39,9 +39,6 @@ public class SearchActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 
-            Log.i("SearchActivity", "Search started for " + query);
-            //showResults(query);
-
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
             FragmentTransaction ft;

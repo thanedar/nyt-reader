@@ -19,7 +19,4 @@ public interface ApiInterface {
     @GET("svc/search/v2/articlesearch.json")
     Call<ArticleSearch> searchArticles(@QueryMap Map<String, String> params);
 
-    /*@GET("movie/{id}")
-    Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
-    */
 }

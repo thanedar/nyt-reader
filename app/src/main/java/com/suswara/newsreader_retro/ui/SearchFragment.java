@@ -81,8 +81,6 @@ public class SearchFragment extends Fragment {
         queryMap.put("api_key", TS_API_KEY);
         queryMap.put("q", searchString);
 
-        Log.i(TAG, "QueryMap is " + queryMap.toString());
-
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
@@ -95,7 +93,7 @@ public class SearchFragment extends Fragment {
                     results = response.body().getResponse().getDocs();
                 }
                 else {
-                    results = new ArrayList<AS_Doc>();
+                    results = new ArrayList<>();
                 }
                 articleListingAdapter = new ArticleListingAdapter(results, R.layout.list_item_headline, getActivity().getApplicationContext());
                 recyclerView.setAdapter(articleListingAdapter);
