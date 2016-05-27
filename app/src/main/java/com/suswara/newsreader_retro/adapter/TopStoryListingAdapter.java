@@ -60,6 +60,7 @@ public class TopStoryListingAdapter extends RecyclerView.Adapter<TopStoryListing
                 Intent intent = new Intent(mContext, StoryActivity.class);
                 StoryDetail storyDetail = new StoryDetail();
                 storyDetail.setTitle(story.getTitle());
+                storyDetail.setSnippet(story.get_abstract());
                 intent.putExtra(StoryActivity.EXTRA_STORY, storyDetail);
                 mContext.startActivity(intent);
 

@@ -18,14 +18,10 @@ public class StoryActivity extends AppCompatActivity {
 
     ImageView backdrop;
     ImageView image;
-    TextView title;
     TextView byline;
     TextView snippet;
 
     StoryDetail storyDetail;
-    String titleString = "";
-    String bylineString = "";
-    String snippetString = "";
     String imageString = "";
     String backdropString = "";
 
@@ -50,12 +46,13 @@ public class StoryActivity extends AppCompatActivity {
         Log.i("StoryDetail", storyDetail.toString());
 
         backdrop = (ImageView) findViewById(R.id.backdrop);
-        title = (TextView) findViewById(R.id.story_title);
         byline = (TextView) findViewById(R.id.story_byline);
-        snippet = (TextView) findViewById(R.id.story_text);
+        snippet = (TextView) findViewById(R.id.story_snippet);
         image = (ImageView) findViewById(R.id.story_image);
 
-        title.setText(storyDetail.getTitle());
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        collapsingToolbarLayout.setTitle(storyDetail.getTitle());
+
         snippet.setText(storyDetail.getSnippet());
         byline.setText(storyDetail.getByline());
 
