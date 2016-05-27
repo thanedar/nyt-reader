@@ -60,7 +60,8 @@ public class ArticleListingAdapter extends RecyclerView.Adapter<ArticleListingAd
                 Log.i("StoryViewHolder", "story at position " + story.toString());
                 Intent intent = new Intent(mContext, StoryActivity.class);
                 StoryDetail storyDetail = new StoryDetail();
-                storyDetail.setTitle(story.getHeadline().toString());
+                storyDetail.setTitle(story.getHeadline().getMain().toString());
+                storyDetail.setSnippet(story.getSnippet());
                 intent.putExtra(StoryActivity.EXTRA_STORY, storyDetail);
                 mContext.startActivity(intent);
 
@@ -72,7 +73,7 @@ public class ArticleListingAdapter extends RecyclerView.Adapter<ArticleListingAd
     @Override
     public void onBindViewHolder(StoryViewHolder holder, final int position) {
         if (getItemCount() >= 0) {
-            holder.storyTitle.setText(stories.get(position).getHeadline().toString());
+            holder.storyTitle.setText(stories.get(position).getHeadline().getMain().toString());
             holder.storySubtitle.setText(stories.get(position).getSnippet());
             //holder.thumbnail.setText(stories.get(position).getPublishedDate());
         }

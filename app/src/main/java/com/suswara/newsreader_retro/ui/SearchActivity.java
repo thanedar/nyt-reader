@@ -44,12 +44,10 @@ public class SearchActivity extends AppCompatActivity {
 
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
-            if(fragmentManager.findFragmentByTag(SearchFragment.TAG) == null || (fragmentManager.findFragmentByTag(SearchFragment.TAG) != null && !fragmentManager.findFragmentByTag(SearchFragment.TAG).isVisible())){
-                FragmentTransaction ft;
-                ft = fragmentManager.beginTransaction();
-                ft.add(R.id.search_container, SearchFragment.newInstance(query), SearchFragment.TAG);
-                ft.commit();
-            }
+            FragmentTransaction ft;
+            ft = fragmentManager.beginTransaction();
+            ft.replace(R.id.search_container, SearchFragment.newInstance(query), SearchFragment.TAG);
+            ft.commit();
 
         }
     }

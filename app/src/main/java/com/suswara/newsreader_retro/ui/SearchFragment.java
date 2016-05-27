@@ -19,7 +19,9 @@ import com.suswara.newsreader_retro.rest.ApiClient;
 import com.suswara.newsreader_retro.rest.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,10 +77,16 @@ public class SearchFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.news_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        Map<String, String> queryMap = new HashMap<>();
+        queryMap.put("api_key", TS_API_KEY);
+        queryMap.put("q", searchString);
+
+        Log.i(TAG, "QueryMap is " + queryMap.toString());
+
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<ArticleSearch> call = apiService.searchArticles(TS_API_KEY);
+        Call<ArticleSearch> call = apiService.searchArticles(queryMap);
         call.enqueue(new Callback<ArticleSearch>() {
             @Override
             public void onResponse(Call<ArticleSearch> call, Response<ArticleSearch> response) {
